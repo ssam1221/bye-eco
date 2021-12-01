@@ -15,13 +15,12 @@ window.onload = async () => {
 
     const visitor = location.href.split('?id=')[1];
 
-    console.log(visitor)
+    console.log(`visitor : ${visitor}`)
     try {
 
         if (visitor) {
             await loadScript(`${visitor}.js`);
-        }
-        else {
+        } else {
             await loadScript(`default.js`);
         }
     } catch (err) {

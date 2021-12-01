@@ -2,17 +2,15 @@ const Slider = (() => {
 
 
     function fadeIn(element) {
-        let cls = element.getAttribute(`class`);
-        if (cls.indexOf(`FadeOut`) !== -1) {
-            element.setAttribute(`class`, `${element.getAttribute(`class`).replaceAll(`FadeOut`, `FadeIn`)}`);
+        if (null === element.getAttribute(`class`)) {
+            element.setAttribute(`class`, `fade`);
         }
-        else {
-            element.setAttribute(`class`, `${element.getAttribute(`class`)} FadeIn`);
-        }
+        element.style.visibility = `visible`;
+        element.setAttribute(`class`, `${element.getAttribute(`class`).replaceAll(`fade`, `FadeIn`).replaceAll(`FadeOut`, `FadeIn`)}`);
     }
 
     function fadeOut(element) {
-        element.setAttribute(`class`, `${element.getAttribute(`class`).replaceAll(`FadeIn`, `FadeOut`)}`);
+        element.setAttribute(`class`, `${element.getAttribute(`class`).replaceAll(`fade`, `FadeOut`).replaceAll(`FadeIn`, `FadeOut`)}`);
     }
 
     class Slider {
@@ -70,8 +68,7 @@ const Slider = (() => {
                         interval = setInterval(() => {
                             if (audioTag.volume >= 0.05) {
                                 audioTag.volume -= 0.05;
-                            }
-                            else {
+                            } else {
                                 audioTag.volume = 0;
                                 audioTag.muted = true;
                             }
@@ -187,7 +184,9 @@ const Slider = (() => {
             fadeIn(loading);
             setTimeout(() => {
                 fadeOut(loading);
-
+                setTimeout(() => {
+                    loading.style.visibility = `hidden`;
+                }, 1000);
                 // End
                 self.contents.push(() => {
 
@@ -196,7 +195,7 @@ const Slider = (() => {
                 for (const content of self.contents) {
                     content();
                 }
-            }, 8000);
+            }, 3000);
         }
     }
 

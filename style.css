@@ -1,0 +1,91 @@
+@font-face {
+    font-family: PenStyle;
+    src: url('./font/mr-de-haviland.regular.ttf');
+}
+
+@keyframes animationFadeIn {
+    0% {opacity : 0%; visibility: visible;}
+    99% {opacity : 100%}
+    100% {opacity : 100%}
+}
+
+@keyframes animationFadeOut {
+    0% {opacity : 100%}
+    99% {opacity : 0%}
+    100% {opacity : 0%; visibility: hidden;}
+}
+
+div#loadSpinner {
+    position: absolute;
+    left: calc(50vw - 60px);
+    top: calc(50vh - 60px);
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+* {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+button#startAnimation {
+    position: absolute;
+    left: 40vw;
+    top: 40vh;
+    width: 20vw;
+    height: 20vh;
+}
+
+body {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+div#bgmPlayerTitle {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    z-index: 99999;
+    margin: 20px;
+    font-size: 36px;
+}
+
+div#loading {
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
+.PenStyle {
+    font-family: PenStyle;
+}
+
+.textContents {
+    position: absolute;
+}
+
+.fadeIn {
+    animation: animationFadeIn linear 1s;
+}
+
+.fadeOut {
+    animation: animationFadeOut linear 1s;
+}

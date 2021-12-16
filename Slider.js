@@ -219,7 +219,7 @@ const Slider = (() => {
                 this.addText({
                     x: `0`,
                     y: `80vh`,
-                    text: '<span class="PenStyle" style="font-size: 96px;">End of page.</span><br><br>' +
+                    text: '<span class="PenStyle" style="font-size: 96px;">End of page.</span><br>' +
                         '<span style="font-size: 32px;">이 페이지는 바닐라 스크립트로 제작되었습니다.</span>',
                     style: {
                         color: `white`,

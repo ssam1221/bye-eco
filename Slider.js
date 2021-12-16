@@ -5,8 +5,12 @@ const Slider = (() => {
         if (null === element.getAttribute(`class`)) {
             element.setAttribute(`class`, `fade`);
         }
+        else {
+            element.setAttribute(`class`, `${element.getAttribute(`class`)} fade`);
+        }
         element.style.visibility = `visible`;
         element.setAttribute(`class`, `${element.getAttribute(`class`).replaceAll(`fade`, `FadeIn`).replaceAll(`FadeOut`, `FadeIn`)}`);
+
     }
 
     function fadeOut(element) {
@@ -21,6 +25,8 @@ const Slider = (() => {
         }
 
         static contents = [];
+        static lastContentStart = 0;
+        static lastContentEnd = 0;
 
         static BGMs = [];
 
@@ -115,6 +121,9 @@ const Slider = (() => {
 
             const self = this;
 
+            self.lastContentStart = Math.max(params.start, self.lastContentStart);
+            self.lastContentEnd = Math.max(params.start + params.duration, self.lastContentStart + params.duration);
+
             self.contents.push(() => {
                 setTimeout(() => {
                     const div = document.createElement(`div`);
@@ -127,6 +136,7 @@ const Slider = (() => {
                     }
 
                     fadeIn(div);
+                    div.style.position = `absolute`;
                     div.style.left = params.x;
                     div.style.top = params.y;
 
@@ -151,6 +161,9 @@ const Slider = (() => {
 
             const self = this;
 
+            self.lastContentStart = Math.max(params.start, self.lastContentStart);
+            self.lastContentEnd = Math.max(params.start + params.duration, self.lastContentStart + params.duration);
+
             self.contents.push(() => {
                 setTimeout(() => {
                     const div = document.createElement(`div`);
@@ -162,10 +175,23 @@ const Slider = (() => {
                             div.style[css] = params.style[css];
                         }
                     }
-                    fadeIn(div);
+                    if (params.center) {
+                        div.style.width = `100vw`;
+                        div.style.height = `100vh`;
+                        div.style.display = `table-cell`;
+                        div.style.verticalAlign = `middle`;
+                        div.style.left = `0`;
+                        div.style.top = `0`;
+                    }
+                    else {
+                        div.style.position = `absolute`;
+                        div.style.left = params.x;
+                        div.style.top = params.y;
+                    }
                     div.style.left = params.x;
                     div.style.top = params.y;
                     self.DOMElements.mainContainer.appendChild(div);
+                    fadeIn(div);
                     setTimeout(() => {
                         fadeOut(div);
                         setTimeout(() => {
@@ -177,25 +203,27 @@ const Slider = (() => {
         }
 
         static play() {
+            // document.getElementsByTagName('body')[0].requestFullscreen();
             const self = this;
             const startBtn = document.getElementById(`startAnimation`);
             const loading = document.getElementById(`loading`);
             fadeOut(startBtn);
             fadeIn(loading);
             setTimeout(() => {
+                startBtn.style.visibility = `hidden`;
+                startBtn.innerHTML = `다시보기`;
                 fadeOut(loading);
                 setTimeout(() => {
                     loading.style.visibility = `hidden`;
                 }, 1000);
-                // End
-                self.contents.push(() => {
 
-                });
+                // End
+             
 
                 for (const content of self.contents) {
                     content();
                 }
-            }, 3000);
+            }, 1000);
         }
     }
 

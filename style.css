@@ -62,6 +62,7 @@ div#loadSpinner {
     margin: 0;
     padding: 0;
     border: 0;
+    font-size: 48px;
 }
 
 button#startAnimation {
@@ -74,6 +75,8 @@ button#startAnimation {
 
 body {
     position: absolute;
+    background-color: black;
+    color: #EEEEEE;
     left: 0px;
     top: 0px;
     width: 100vw;
@@ -104,7 +107,7 @@ div#loading {
 }
 
 .textContents {
-    position: absolute;
+    text-align: center;
 }
 
 .fadeIn {

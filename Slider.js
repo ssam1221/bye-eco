@@ -1,11 +1,11 @@
 const Slider = (() => {
 
+    const visitor = location.href.split('?id=')[1];
 
     function fadeIn(element) {
         if (null === element.getAttribute(`class`)) {
             element.setAttribute(`class`, `fade`);
-        }
-        else {
+        } else {
             element.setAttribute(`class`, `${element.getAttribute(`class`)} fade`);
         }
         element.style.visibility = `visible`;
@@ -15,6 +15,9 @@ const Slider = (() => {
 
     function fadeOut(element) {
         element.setAttribute(`class`, `${element.getAttribute(`class`).replaceAll(`fade`, `FadeOut`).replaceAll(`FadeIn`, `FadeOut`)}`);
+        setTimeout(() => {
+            element.style.visibility = `hidden`;
+        }, 950)
     }
 
     class Slider {
@@ -182,8 +185,7 @@ const Slider = (() => {
                         div.style.verticalAlign = `middle`;
                         div.style.left = `0`;
                         div.style.top = `0`;
-                    }
-                    else {
+                    } else {
                         div.style.position = `absolute`;
                         div.style.left = params.x;
                         div.style.top = params.y;
@@ -202,6 +204,55 @@ const Slider = (() => {
             });
         }
 
+        static end(time) {
+            if (visitor) {
+                const duration = 5000;
+                this.addImage({
+                    center: true,
+                    src: `ending/eco.jpg`,
+                    style: {},
+                    start: time,
+                    duration: duration,
+                });
+                this.addText({
+                    x: `0`,
+                    y: `80vh`,
+                    text: '<span class="PenStyle" style="font-size: 96px;">End of document.</span>',
+                    style: {
+                        color: `white`,
+                        width: `100vw`,
+                        display: `table-cell`,
+                        verticalAlign: `middle`,
+                        textAlign: `center`
+                    },
+                    start: time + duration,
+                    duration: 300000,
+                })
+                this.addImage({
+                    x: `calc(50vw - 480px)`,
+                    y: `calc(50vh - 270px)`,
+                    src: `ending/${visitor}.jpg`,
+                    style: {},
+                    start: time + duration,
+                    duration: 300000,
+                });
+            } else {
+                this.addText({
+                    center: true,
+                    text: '<span class="PenStyle" style="font-size: 96px;">End of document.</span>',
+                    // style: {
+                    //     color: `white`,
+                    //     width: `100vw`,
+                    //     display: `table-cell`,
+                    //     verticalAlign: `middle`,
+                    //     textAlign: `center`
+                    // },
+                    start: time,
+                    duration: 300000,
+                })
+            }
+        }
+
         static play() {
             // document.getElementsByTagName('body')[0].requestFullscreen();
             const self = this;
@@ -218,7 +269,7 @@ const Slider = (() => {
                 }, 1000);
 
                 // End
-             
+
 
                 for (const content of self.contents) {
                     content();

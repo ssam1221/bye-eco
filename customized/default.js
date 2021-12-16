@@ -9,7 +9,7 @@ document.getElementById(`startAnimation`).onclick = () => {
     Slider.addAudio({
         src: `A Fallen Leaf.mp3`,
         start: 1000,
-        duration: 50000
+        duration: 500000
     })
 
     // Slider.addAudio({
@@ -24,6 +24,10 @@ document.getElementById(`startAnimation`).onclick = () => {
         return _textStart;
     }
 
+    function getImageStart() {
+        return _textStart;
+    }
+
     Slider.addText({
         text: '안녕하세요.',
         center: true,
@@ -34,7 +38,7 @@ document.getElementById(`startAnimation`).onclick = () => {
     });
 
     Slider.addText({
-        text: '12월 3일을 마지막으로<br>서초로 출근하는<br>박준영 선임입니다.',
+        text: '12월 17일을 마지막으로<br>팀 이동을 하는<br>박준영 선임입니다.',
         center: true,
         style: {
             color: `white`
@@ -42,30 +46,40 @@ document.getElementById(`startAnimation`).onclick = () => {
         start: getTextStart(), duration: 3000,
     });
 
+
+    Slider.addText({
+        text: '19일 부로 14년부터 약 7년 간 해 왔던<br>webOS Signage 업무에서,',
+        center: true,
+        style: {
+            color: `white`
+        },
+        start: getTextStart(), duration: 3000,
+    });
 
     Slider.addImage({
         x: `calc(50vw - 250px)`, y: `25vh`,
         src: 'webossignage_logo.png',
         style: {
         },
-        start: 9000, duration: 3000,
+        start: getImageStart(), duration: 3000,
     });
 
     Slider.addText({
-        text: '19일 부로 14년부터 해 왔던<br>webOS Signage 업무에서,',
         center: true,
+        text: '제가 그나마 잘 하고 잘 하고 싶어하는 업무를 해 보고 싶기도 하고,',
         style: {
             color: `white`
         },
         start: getTextStart(), duration: 3000,
     });
 
-    Slider.addImage({
-        x: `calc(50vw - 235px)`, y: `25vh`,
-        src: 'procentric_logo.png',
+    Slider.addText({
+        center: true,
+        text: '이 외에도 여러 이유로,',
         style: {
+            color: `white`
         },
-        start: 13000, duration: 3000,
+        start: getTextStart(), duration: 3000,
     });
 
     Slider.addText({
@@ -77,9 +91,17 @@ document.getElementById(`startAnimation`).onclick = () => {
         start: getTextStart(), duration: 3000,
     });
 
+    Slider.addImage({
+        x: `calc(50vw - 235px)`, y: `25vh`,
+        src: 'procentric_logo.png',
+        style: {
+        },
+        start: getImageStart(), duration: 3000,
+    });
+
     Slider.addText({
         center: true,
-        text: '오랜 기간동안 하던 업무 대신 새로운 업무',
+        text: '오랜 기간동안 같이 하던 동료 분들과,',
         style: {
             color: `white`
         },
@@ -88,33 +110,34 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.addText({
         center: true,
-        text: '오랜 기간동안 하던 업무 대신 새로운 업무',
+        text: '몇 년을 해 오던 업무 대신 새로운 업무를 하게 되어,',
         style: {
             color: `white`
         },
         start: getTextStart(), duration: 3000,
     });
 
-
-
-
-
-
     Slider.addText({
         center: true,
-        text: '지금까지 같이 일한 ',
+        text: '뭔가 복잡한 생각과 감정이 계속 드네요.',
         style: {
             color: `white`
         },
         start: getTextStart(), duration: 3000,
     });
 
-
-
+    Slider.addText({
+        center: true,
+        text: '저를 지금 자리에 있게 해 주신 (구) 에코 분들께도 감사드리고,',
+        style: {
+            color: `white`
+        },
+        start: getTextStart(), duration: 3000,
+    });
 
     Slider.addText({
         center: true,
-        text: '또한 1년 가량 Web Solution 프로젝트에 있으면서,',
+        text: '1년 가량 Web Solution 프로젝트에 있으면서,',
         style: {
             color: `white`
         },
@@ -132,7 +155,7 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.addText({
         center: true,
-        text: '감사합니다.',
+        text: '팀을 이동해서도 업무로 도움 받을 일이 많을 것 같습니다.',
         style: {
             color: `white`
         },
@@ -141,12 +164,23 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.addText({
         center: true,
-        text: '<span class="PenStyle" style="font-size: 96px;">End of document.</span>',
+        text: '앞으로도 잘 부탁 드립니다.',
         style: {
             color: `white`
         },
-        start: getTextStart(), duration: 30000,
+        start: getTextStart(), duration: 3000,
     });
+
+    Slider.addText({
+        center: true,
+        text: '감사합니다.',
+        style: {
+            color: `white`
+        },
+        start: getTextStart(), duration: 3000,
+    });
+
+    Slider.end(getTextStart());
 
     Slider.play();
 }

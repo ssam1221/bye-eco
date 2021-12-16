@@ -18,7 +18,6 @@ window.onload = async () => {
 
     const visitor = location.href.split('?id=')[1];
 
-    console.log(`visitor : ${visitor}`)
     try {
 
         if (visitor) {

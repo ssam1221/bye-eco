@@ -121,29 +121,31 @@ const Slider = (() => {
             params.start
             params.duration
 
-
             const self = this;
 
             self.lastContentStart = Math.max(params.start, self.lastContentStart);
             self.lastContentEnd = Math.max(params.start + params.duration, self.lastContentStart + params.duration);
 
+            const div = document.createElement(`div`);
+
+            div.innerHTML = `<img src='./res/${params.src}'>`;
+            if (`style` in params) {
+                for (const css in params.style) {
+                    div.style[css] = params.style[css];
+                }
+            }
+
+            div.setAttribute(`class`, `fade`);
+            div.style.position = `absolute`;
+            div.style.left = params.x;
+            div.style.top = params.y;
+            div.style.visibility = `hidden`;
+            self.DOMElements.mainContainer.appendChild(div);
+
             self.contents.push(() => {
                 setTimeout(() => {
-                    const div = document.createElement(`div`);
-
-                    div.innerHTML = `<img src='./res/${params.src}'>`;
-                    if (`style` in params) {
-                        for (const css in params.style) {
-                            div.style[css] = params.style[css];
-                        }
-                    }
-
+                    div.style.visibility = `visible`;
                     fadeIn(div);
-                    div.style.position = `absolute`;
-                    div.style.left = params.x;
-                    div.style.top = params.y;
-
-                    self.DOMElements.mainContainer.appendChild(div);
                     setTimeout(() => {
                         fadeOut(div);
                         setTimeout(() => {
@@ -217,7 +219,7 @@ const Slider = (() => {
                 this.addText({
                     x: `0`,
                     y: `80vh`,
-                    text: '<span class="PenStyle" style="font-size: 96px;">End of document.</span>',
+                    text: '<span class="PenStyle" style="font-size: 96px;">End of page.</span>',
                     style: {
                         color: `white`,
                         width: `100vw`,
@@ -239,14 +241,14 @@ const Slider = (() => {
             } else {
                 this.addText({
                     center: true,
-                    text: '<span class="PenStyle" style="font-size: 96px;">End of document.</span>',
-                    // style: {
-                    //     color: `white`,
-                    //     width: `100vw`,
-                    //     display: `table-cell`,
-                    //     verticalAlign: `middle`,
-                    //     textAlign: `center`
-                    // },
+                    text: '<span class="PenStyle" style="font-size: 96px;">End of page.</span>',
+                    style: {
+                        color: `white`,
+                        width: `100vw`,
+                        display: `table-cell`,
+                        verticalAlign: `middle`,
+                        textAlign: `center`
+                    },
                     start: time,
                     duration: 300000,
                 })

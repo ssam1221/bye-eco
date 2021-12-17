@@ -146,7 +146,7 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.addText({
         center: true,
-        text: '필요하시면 언제든지 연락 주세요.' +
+        text: '필요하시면 언제든지 연락 주세요.<br>' +
             '<span style="font-size: 32px;">집들이때에도 보면 좋겠네요.</span>',
         style: {
             color: `white`

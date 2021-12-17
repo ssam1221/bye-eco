@@ -33,6 +33,8 @@ const Slider = (() => {
 
         static BGMs = [];
 
+        static bgmReady = 0;
+
         static init() {
             this.BGMPlayer = document.getElementById(`bgmPlayer`);
 
@@ -47,6 +49,7 @@ const Slider = (() => {
             params.src
             params.start
             params.duration
+            const self = this;
 
             const audioTitle = document.getElementById(`bgmPlayerTitle`);
             const audioTag = document.createElement(`audio`);
@@ -57,6 +60,12 @@ const Slider = (() => {
             audioTag.load();
             this.DOMElements.mainContainer.appendChild(audioTag);
             // audioTag.play();
+
+            audioTag.oncanplaythrough = function () {
+                self.bgmReady++;
+            }
+
+            self.BGMs.push(audioTag);
 
             this.contents.push(() => {
                 let interval = 0;
@@ -264,21 +273,34 @@ const Slider = (() => {
             const loading = document.getElementById(`loading`);
             fadeOut(startBtn);
             fadeIn(loading);
-            setTimeout(() => {
-                startBtn.style.visibility = `hidden`;
-                startBtn.innerHTML = `다시보기`;
-                fadeOut(loading);
-                setTimeout(() => {
-                    loading.style.visibility = `hidden`;
-                }, 1000);
 
-                // End
+            let interval = setInterval(() => {
+
+                console.log(`Loading data ${self.bgmReady} / ${self.BGMs.length}`);
+
+                if (self.bgmReady === self.BGMs.length) {
+                    clearInterval(interval);
+                    console.log(`Start`)
+
+                    setTimeout(() => {
+                        startBtn.style.visibility = `hidden`;
+                        startBtn.innerHTML = `다시보기`;
+                        fadeOut(loading);
+                        setTimeout(() => {
+                            loading.style.visibility = `hidden`;
+                        }, 1000);
+
+                        // End
 
 
-                for (const content of self.contents) {
-                    content();
+                        for (const content of self.contents) {
+                            content();
+                        }
+                    }, 1000);
                 }
-            }, 1000);
+            })
+
+
         }
     }
 

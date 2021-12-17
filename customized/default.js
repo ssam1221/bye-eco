@@ -1,22 +1,6 @@
 document.getElementById(`startAnimation`).onclick = () => {
-    // const start = new Date();
-    // setInterval(() => {
-    //     document.getElementById(`timer`).innerHTML = new Date() - start;
-    // }, 50)
 
     Slider.init();
-
-    Slider.addAudio({
-        src: `A Fallen Leaf.mp3`,
-        start: 1000,
-        duration: 500000
-    })
-
-    // Slider.addAudio({
-    //     src: `In a Fluffy Cotton Candy.mp3`,
-    //     start: 5000,
-    //     duration: 5000
-    // })
 
     let _textStart = 1000;
     function getTextStart() {
@@ -182,5 +166,10 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.end(getTextStart());
 
+    Slider.addAudio({
+        src: `A Fallen Leaf.mp3`,
+        start: 1000,
+        duration: getTextStart()
+    })
     Slider.play();
 }

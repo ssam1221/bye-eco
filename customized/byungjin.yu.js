@@ -1,22 +1,6 @@
 document.getElementById(`startAnimation`).onclick = () => {
-    // const start = new Date();
-    // setInterval(() => {
-    //     document.getElementById(`timer`).innerHTML = new Date() - start;
-    // }, 50)
 
     Slider.init();
-
-    Slider.addAudio({
-        src: `In the Calm Countryside.mp3`,
-        start: 1000,
-        duration: 500000
-    })
-
-    // Slider.addAudio({
-    //     src: `In a Fluffy Cotton Candy.mp3`,
-    //     start: 5000,
-    //     duration: 5000
-    // })
 
     let _textStart = 1000;
 
@@ -160,7 +144,7 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.addText({
         center: true,
-        text: '필요하시면 언제든지 연락 주세요.' +
+        text: '필요하시면 언제든지 연락 주세요.<br>' +
             '<span style="font-size: 32px;">집들이때에도 보면 좋겠네요.</span>',
         style: {
             color: `white`
@@ -181,5 +165,10 @@ document.getElementById(`startAnimation`).onclick = () => {
 
     Slider.end(getTextStart());
 
+    Slider.addAudio({
+        src: `In the Calm Countryside.mp3`,
+        start: 1000,
+        duration: getTextStart()
+    })
     Slider.play();
 }
